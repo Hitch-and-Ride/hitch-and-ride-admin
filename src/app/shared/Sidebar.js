@@ -168,7 +168,7 @@ class Sidebar extends Component {
               <i className="mdi mdi-format-list-bulleted menu-icon"></i>
             </div>
             <Collapse in={this.state.formElementsMenuOpen}>
-              {/* <ul className="nav flex-column sub-menu">
+              <ul className="nav flex-column sub-menu">
                 <li className="nav-item">
                   {" "}
                   <Link
@@ -182,7 +182,7 @@ class Sidebar extends Component {
                     <Trans>Trips</Trans>
                   </Link>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   {" "}
                   <Link
                     className={
@@ -194,8 +194,8 @@ class Sidebar extends Component {
                   >
                     <Trans>Equipment</Trans>
                   </Link>
-                </li>
-              </ul> */}
+                </li> */}
+              </ul>
             </Collapse>
           </li>
           <li
