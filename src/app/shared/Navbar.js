@@ -59,7 +59,7 @@ class Navbar extends Component {
                   </div>
                   <div className="nav-profile-text">
                     <p className="mb-1 text-black">
-                      <Trans>Timothy Masiko</Trans>
+                      <Trans>Denis Amayo</Trans>
                     </p>
                   </div>
                 </Dropdown.Toggle>

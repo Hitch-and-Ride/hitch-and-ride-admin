@@ -309,7 +309,7 @@
                                 l.a.createElement(
                                   "p",
                                   { className: "mb-1 text-black" },
-                                  l.a.createElement(A.a, null, "Timothy Masiko")
+                                  l.a.createElement(A.a, null, "Denis Amayo")
                                 )
                               )
                             ),
@@ -871,7 +871,7 @@
                             l.a.createElement(
                               "span",
                               { className: "font-weight-bold mb-2" },
-                              l.a.createElement(A.a, null, "Timothy Masiko")
+                              l.a.createElement(A.a, null, "Denis Amayo")
                             ),
                             l.a.createElement(
                               "span",
@@ -2548,7 +2548,7 @@
                 Calendar: "\u0627\u0644\u062a\u0642\u0648\u064a\u0645",
                 Help: "\u0645\u0633\u0627\u0639\u062f\u0629",
                 Documentation: "\u062a\u0648\u062b\u064a\u0642",
-                "Timothy Masiko":
+                "Denis Amayo":
                   "\u062f\u064a\u0641\u064a\u062f \u062c\u0631\u064a\u0645\u0627\u0643\u0633",
                 "Project Manager":
                   "\u0645\u062f\u064a\u0631 \u0627\u0644\u0645\u0634\u0631\u0648\u0639",

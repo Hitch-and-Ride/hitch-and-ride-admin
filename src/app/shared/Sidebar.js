@@ -73,7 +73,7 @@ class Sidebar extends Component {
               </div>
               <div className="nav-profile-text">
                 <span className="font-weight-bold mb-2">
-                  <Trans>Timothy Masiko</Trans>
+                  <Trans>Denis Amayo</Trans>
                 </span>
                 <span className="text-secondary text-small">
                   <Trans>Administrator</Trans>
@@ -177,7 +177,7 @@ class Sidebar extends Component {
                         ? "nav-link active"
                         : "nav-link"
                     }
-                    to="/form-elements/basic-elements"
+                    to="/booking/trips"
                   >
                     <Trans>Trips</Trans>
                   </Link>
