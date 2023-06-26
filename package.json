@@ -1,7 +1,6 @@
 {
   "name": "fleet-manager-web",
   "version": "1.1.0",
-  "homepage": "http://bootstrapdash.com/demo/purple-react-free/template/demo_1/preview",
   "private": true,
   "engines": {
     "node": "11.15.0"
