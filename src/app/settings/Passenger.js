@@ -64,7 +64,7 @@ function Passenger() {
         "password": password,
     }
     axios
-      .post(`${baseUrl}passenger/create/`,payload)
+      .post(`${baseUrl}passengers/create/`,payload)
       .then((response) => {
         Alert("Passenger has been created ")
         handleClose()
