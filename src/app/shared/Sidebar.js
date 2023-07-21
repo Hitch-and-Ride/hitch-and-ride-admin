@@ -228,7 +228,7 @@ class Sidebar extends Component {
                     }
                     to="/settings/passenger"
                   >
-                    <Trans>Passenger</Trans>
+                    <Trans>Passengers</Trans>
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -255,6 +255,34 @@ class Sidebar extends Component {
                     to="/settings/driver"
                   >
                     <Trans>Drivers</Trans>
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  {" "}
+                  <Link
+                    className={
+                      this.isPathActive("/settings/station")
+                        ? "nav-link active"
+                        : "nav-link"
+                    }
+                    to="/settings/station"
+                  >
+                    <Trans>Stations</Trans>
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  {" "}
+                  <Link
+                    className={
+                      this.isPathActive("/settings/route")
+                        ? "nav-link active"
+                        : "nav-link"
+                    }
+                    to="/settings/route"
+                  >
+                    <Trans>Routes</Trans>
                   </Link>
                 </li>
               </ul>

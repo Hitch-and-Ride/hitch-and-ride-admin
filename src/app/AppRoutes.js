@@ -16,6 +16,8 @@ const BasicTable = lazy(() => import("./tables/BasicTable"));
 const User = lazy(() => import("./settings/User"));
 const Vehicle = lazy(() => import("./settings/Vehicle"));
 const Driver = lazy(() => import("./settings/Driver"));
+const Routes = lazy(() => import("./settings/Route")); // using 'routes'  to avoid clashing the react router dom route
+const Station = lazy(() => import("./settings/Station"));
 const Passenger = lazy(() => import("./settings/Passenger"));
 
 
@@ -50,6 +52,8 @@ class AppRoutes extends Component {
           <Route path="/settings/vehicle" component={Vehicle} />
           <Route path="/settings/passenger" component={Passenger} />
           <Route path="/settings/driver" component={Driver} />
+          <Route path="/settings/station" component={Station} />
+          <Route path="/settings/route" component={Routes} />
 
 
           <Route path="/user-pages/login-1" component={Login} />

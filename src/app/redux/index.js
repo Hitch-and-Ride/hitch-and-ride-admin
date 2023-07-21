@@ -5,13 +5,21 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import storage from 'redux-persist/lib/storage';
 
 const initialState = {
-  vehicleList: [],
+  stationList: [],
+  vehicleList:[],
+  routeList:[],
+
   
 };
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_VEHICLE_LIST':
       return { ...state, vehicleList: action.vehicleList };
+    case 'SET_STATION_LIST':
+      return { ...state, stationList: action.stationList };
+
+    case 'SET_ROUTE_LIST':
+      return { ...state, routeList: action.routeList };
 
     // no default
   }

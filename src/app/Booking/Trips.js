@@ -83,9 +83,9 @@ function Trip() {
                       <td>{trip.trip.driver.vehicle.type_of_vehicle}</td>
                       <td>{trip.passenger.user.email}</td>
                       <td>{trip.trip.driver.user.email}</td>
-                      <td>{trip.trip.pick_up_location}</td>
+                      <td>{trip.trip.route.pick_up_station.name}</td>
                       <td>{trip.trip.date}</td>
-                      <td>{trip.trip.destination}</td>
+                      <td>{trip.trip.route.destination_station.name}</td>
                       {/* <td className="text-danger">
                         {" "}
                         <i className="mdi mdi-arrow-up"></i>Drop
