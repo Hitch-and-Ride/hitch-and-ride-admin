@@ -19,6 +19,7 @@ function Passenger() {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [gender, setGender] = useState("");
   const [user, setUser] = useState({});
   const [password, setPassword] = useState("");
@@ -76,6 +77,12 @@ function Passenger() {
         "username": `${firstName}_${lastName}`,
         "first_name": firstName,
         "last_name": lastName,
+        "phone_numbers": [
+          {
+            "phone_number": phoneNumber,
+            "primary": true
+          }
+        ],
         "gender": gender,
         "wallet_balance": "500"
     }
@@ -137,6 +144,16 @@ function Passenger() {
               onChange={(event)=>setLastName(event.target.value)}
             />
           </Form.Group>
+          <Form.Group>
+            <label htmlFor="exampleInputUsername1">Phone Number </label>
+            <Form.Control
+              type="text"
+              id="exampleInputUsername1"
+              placeholder="Phone Number"
+              size="lg"
+              onChange={(event)=>setPhoneNumber(event.target.value)}
+            />
+          </Form.Group>
           {/* <Form.Group>
             <label htmlFor="exampleInputUsername1">Number</label>
             <Form.Control
@@ -190,6 +207,7 @@ function Passenger() {
                         <th>Email</th>
                         <th>First Name </th>
                         <th>Last Name </th>
+                        <th>Phone Number </th>
                         <th>Availability</th>
                         <th>Action</th>
                       </tr>
@@ -201,6 +219,7 @@ function Passenger() {
                         <td>{passenger.user.email}</td>
                         <td>{passenger.user.first_name} </td>
                         <td>{passenger.user.last_name} </td>
+                        <td>{passenger.user.phone_numbers.length > 0 ? passenger.user.phone_numbers[0].phone_number:""} </td>
                         <td>
                           {passenger.is_available? (<label className="badge badge-success">Available</label>):(<label className="badge badge-danger">Unavailable</label>)}
                           

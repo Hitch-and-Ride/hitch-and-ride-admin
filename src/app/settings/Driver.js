@@ -23,6 +23,7 @@ function Driver() {
   const [vehicle, setVehicle] = useState("");
   const [drivers, setDrivers] = useState([]);
   const [firstName, setFirstName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [lastName, setLastName] = useState("");
   const [gender, setGender] = useState("");
   const [user, setUser] = useState({});
@@ -54,6 +55,12 @@ function Driver() {
         "first_name": firstName,
         "last_name": lastName,
         "gender": gender,
+        "phone_numbers": [
+          {
+            "phone_number": phoneNumber,
+            "primary": true
+          }
+        ],
         "wallet_balance": "500"
     }
     axios
@@ -169,6 +176,16 @@ function Driver() {
               onChange={(event)=>setLastName(event.target.value)}
             />
           </Form.Group>
+          <Form.Group>
+            <label htmlFor="exampleInputUsername1">Phone Number </label>
+            <Form.Control
+              type="text"
+              id="exampleInputUsername1"
+              placeholder="Phone Number"
+              size="lg"
+              onChange={(event)=>setPhoneNumber(event.target.value)}
+            />
+          </Form.Group>
           {/* <Form.Group>
             <label htmlFor="exampleInputUsername1">Number</label>
             <Form.Control
@@ -222,6 +239,7 @@ function Driver() {
                         <th>Email</th>
                         <th>First Name </th>
                         <th>Last Name </th>
+                        <th>Phone Number </th>
                         <th>Car </th>
                         <th>Availability</th>
                         <th>Action</th>
@@ -234,6 +252,7 @@ function Driver() {
                         <td>{driver.user.email}</td>
                         <td>{driver.user.first_name} </td>
                         <td>{driver.user.last_name} </td>
+                        <td>{driver.user.phone_numbers.length > 0 ? driver.user.phone_numbers[0].phone_number:""} </td>
                         <td>{driver.vehicle.brand}</td>
                         <td>
                           {driver.is_available? (<label className="badge badge-success">Available</label>):(<label className="badge badge-danger">Unavailable</label>)}
