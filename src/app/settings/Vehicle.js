@@ -20,6 +20,7 @@ function Vehicle() {
   const [isLoaded, setIsLoaded] = useState(false);
   const vehicleList = useSelector((state) => state.vehicleList);
   const [brand, setBrand] = useState("");
+  const [numberPlate, setNumberPlate] = useState("");
   const [seats, setSeats] = useState("");
   const [typeOfCar, setTypeOfCar] = useState("");
   const dispatch = useDispatch();
@@ -56,6 +57,7 @@ function Vehicle() {
         "brand": brand,
         "carrying_capacity": parseInt(seats),
         "is_available": true,
+        "number_plate": numberPlate,
         "current_capacity": 0
     }
     axios
@@ -119,6 +121,17 @@ function Vehicle() {
 
             />
           </Form.Group>
+          <Form.Group>
+            <label htmlFor="exampleInputUsername1">Number Plate</label>
+            <Form.Control
+              type="text"
+              id="exampleInputUsername1"
+              placeholder="Number Plate"
+              size="lg"
+              onChange={(event)=>setNumberPlate(event.target.value)}
+
+            />
+          </Form.Group>
         </>
       );
     } else {
@@ -156,6 +169,17 @@ function Vehicle() {
 
             />
           </Form.Group>
+          <Form.Group>
+            <label htmlFor="exampleInputUsername1">Number Plate</label>
+            <Form.Control
+              type="text"
+              id="exampleInputUsername1"
+              placeholder="Number Plate"
+              size="lg"
+              onChange={(event)=>setNumberPlate(event.target.value)}
+
+            />
+          </Form.Group>
         </>
       );
     }
@@ -190,6 +214,7 @@ function Vehicle() {
                         <th>Type Of Vehicle</th>
                         <th>Brand </th>
                         <th>Carrying Capacity </th>
+                        <th>Number Plate </th>
                         <th>Availability</th>
                         <th>Action</th>
                       </tr>
@@ -201,6 +226,7 @@ function Vehicle() {
                       <td>{vehicle.type_of_vehicle}</td>
                       <td>{vehicle.brand} </td>
                       <td>{vehicle.carrying_capacity}</td>
+                      <td>{vehicle.number_plate}</td>
                       <td>
                         <label className="badge badge-danger">Pending</label>
                       </td>
