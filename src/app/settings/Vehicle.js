@@ -22,6 +22,7 @@ function Vehicle() {
   const [brand, setBrand] = useState("");
   const [numberPlate, setNumberPlate] = useState("");
   const [seats, setSeats] = useState("");
+  const [vehicle, setVehicle] = useState("");
   const [typeOfCar, setTypeOfCar] = useState("");
   const dispatch = useDispatch();
 
@@ -70,8 +71,9 @@ function Vehicle() {
       .catch(handleClose);
   };
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (vehicle) => {
     setIsEdit(true)
+    setVehicle(vehicle)
     setOpen(true);
   };
 
@@ -83,6 +85,23 @@ function Vehicle() {
     event.preventDefault()
     setIsEdit(false)
     setOpen(true);
+  };
+
+  const handleUpdateVehicle = async () => {
+    let payload = {
+      "type_of_vehicle": typeOfCar,
+      "brand": brand,
+      "carrying_capacity": parseInt(seats),
+      "is_available": true,
+      "number_plate": numberPlate,
+  }
+    axios
+      .put(`${baseUrl}vehicles/${vehicle.id}/update/`,payload)
+      .then((response) => {
+        Alert("Details have been updated ")
+        handleClose()
+      })
+      .catch(handleClose);
   };
 
   const handleDialog = () => {
@@ -228,11 +247,11 @@ function Vehicle() {
                       <td>{vehicle.carrying_capacity}</td>
                       <td>{vehicle.number_plate}</td>
                       <td>
-                        <label className="badge badge-danger">Pending</label>
+                        <label className="badge badge-info">Available</label>
                       </td>
                       <td>
                         <button
-                          onClick={handleClickOpen}
+                          onClick={()=>handleClickOpen(vehicle)}
                           type="button"
                           className="btn btn-social-icon"
                         >
@@ -259,7 +278,7 @@ function Vehicle() {
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleClose}>Cancel</Button>
-                <Button onClick={handleCreateVehicle }>Submit</Button>
+                <Button onClick={isEdit? handleUpdateVehicle: handleCreateVehicle} >Submit</Button>
               </DialogActions>
             </Dialog>
           </div>
