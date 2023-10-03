@@ -4,7 +4,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Form } from "react-bootstrap";
+import { Form ,Alert} from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import bsCustomFileInput from "bs-custom-file-input";
 import axios from 'axios';
@@ -14,8 +14,14 @@ import { baseUrl } from '../utils/host';
 function Trip() {
   const [open, setOpen] = React.useState(false);
   const [trips, setTrips] = useState([]);
+  const [trip, setTrip] = useState([]);
+  const [drivers, setDrivers] = useState([]);
+  const [driver, setDriver] = useState("");
+  const [isEdit, setIsEdit] = React.useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (trip) => {
+    setIsEdit(true)
+    setTrip(trip)
     setOpen(true);
   };
 
@@ -25,7 +31,55 @@ function Trip() {
 
   useEffect(() => {
     fetchTrips()
+    fetchDrivers()
   }, [false]);
+
+  const fetchDrivers = async () => {
+    axios
+      .get(`${baseUrl}drivers/available`)
+      .then((response) => {
+        setDrivers(response.data) 
+      })
+      .catch(console.log);
+  };
+
+  const handleUpdatePassengerTrip = async () => {
+
+    let payload = {
+      "driver": driver,
+      "pick_up_location": trip.trip.route.pick_up_station.name,
+      "destination": trip.trip.route.destination_station.name,
+      "date": trip.trip.date,
+      "trip":trip.trip.id
+      
+  }
+    axios
+      .put(`${baseUrl}passengertrips/${trip.passenger.id}/${trip.id}/update/`,payload)
+      .then((response) => {
+        Alert("Details have been updated ")
+        handleClose()
+      })
+      .catch(handleClose);
+  };
+
+  const handleEditDialog = () => {
+      return (
+        <>
+          <Form.Group>
+            <label htmlFor="exampleInputUsername1">Select Driver</label>
+            <div className="col-sm-12">
+              <select className="form-control" onChange={(event)=>setDriver(event.target.value)}>
+              <option value="">Select Destination</option>
+              {drivers.map((driver) => (
+                      <option key={driver.id} value={driver.id}>{`${driver.user.first_name} ${driver.user.last_name}  || ${driver.vehicle.type_of_vehicle}` }</option>
+                    ))}
+                
+              </select>
+            </div>
+          </Form.Group>
+        </>
+      );
+  };
 
 
   const fetchTrips = async () => {
@@ -79,10 +133,10 @@ function Trip() {
                     <tbody>
                     {trips.map((trip)=>(
                       <tr>
-                      <td>{trip.trip.driver.vehicle.brand} </td>
-                      <td>{trip.trip.driver.vehicle.type_of_vehicle}</td>
+                      <td>{trip.trip.driver?trip.trip.driver.vehicle.brand:"not Assigned"} </td>
+                      <td>{trip.trip.driver?trip.trip.driver.vehicle.type_of_vehicle:"not Assigned"}</td>
                       <td>{trip.passenger.user.email}</td>
-                      <td>{trip.trip.driver.user.email}</td>
+                      <td>{trip.trip.driver?trip.trip.driver.user.email:"not Assigned"}</td>
                       <td>{trip.trip.route.pick_up_station.name}</td>
                       <td>{trip.trip.date}</td>
                       <td>{trip.trip.route.destination_station.name}</td>
@@ -94,7 +148,7 @@ function Trip() {
                         <label className="badge badge-success">{trip.trip.status}</label>
                       </td> 
                       <td>
-                        <button type="button" className="btn btn-social-icon">
+                        <button type="button" className="btn btn-social-icon" onClick={()=>handleClickOpen(trip)}>
                           <i className="mdi mdi-border-color"></i>
                         </button>
                         <button type="button" className="btn btn-social-icon">
@@ -112,71 +166,12 @@ function Trip() {
               <DialogTitle>New Trip</DialogTitle>
               <DialogContent>
                 <form className="forms-sample" style={{ width: "500px" }}>
-                  <Form.Group>
-                    <label htmlFor="exampleInputUsername1">
-                      Select Vehicle
-                    </label>
-                    <Form.Control
-                      type="text"
-                      id="exampleInputUsername1"
-                      placeholder="Username"
-                      size="lg"
-                    />
-                  </Form.Group>
-                  <Form.Group>
-                    <label htmlFor="exampleInputUsername1">
-                      Select Passenger
-                    </label>
-                    <Form.Control
-                      type="text"
-                      id="exampleInputUsername1"
-                      placeholder="Username"
-                      size="lg"
-                    />
-                  </Form.Group>
-                  <Form.Group>
-                    <label htmlFor="exampleInputUsername1">
-                      Pickup location
-                    </label>
-                    <Form.Control
-                      type="text"
-                      id="exampleInputUsername1"
-                      placeholder="Username"
-                      size="lg"
-                    />
-                  </Form.Group>
-                  <Form.Group>
-                    <label htmlFor="exampleInputUsername1">Destination</label>
-                    <Form.Control
-                      type="text"
-                      id="exampleInputUsername1"
-                      placeholder="Username"
-                      size="lg"
-                    />
-                  </Form.Group>
-                  <Form.Group>
-                    <label htmlFor="exampleInputUsername1">Reason</label>
-                    <Form.Control
-                      type="text"
-                      id="exampleInputUsername1"
-                      placeholder="Username"
-                      size="lg"
-                    />
-                  </Form.Group>
-                  <Form.Group>
-                    <label htmlFor="exampleInputUsername1">Driver</label>
-                    <Form.Control
-                      type="text"
-                      id="exampleInputUsername1"
-                      placeholder="Username"
-                      size="lg"
-                    />
-                  </Form.Group>
+                {handleEditDialog()}
                 </form>
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleClose}>Cancel</Button>
-                <Button onClick={handleClose}>Subscribe</Button>
+                <Button onClick={ handleUpdatePassengerTrip}>Submit</Button>
               </DialogActions>
             </Dialog>
           </div>
